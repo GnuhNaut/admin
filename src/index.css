@@ -1,3 +1,6 @@
+*{
+  font-family: 'Poppins', sans-serif !important;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +13,44 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.ant-tabs-tab-btn{
+  font-weight: 600;
+}
+.padding-top{
+  padding-top: 12px;
+}
+.ant-input{
+  border-radius: 8px !important;
+}
+input.ant-input{
+  min-height: 36px !important;
+}
+button{
+  border-radius: 8px !important;
+  min-height: 36px !important;
+}
+#root{
+  height: 100% !important;
+}
+.ant-layout.layout{
+  height: 100% !important;
+}
+.answer-game,
+.ant-list-item-meta-title{
+  word-break: break-all;
+  max-height: 22px;
+  overflow: hidden;
+}
+.ant-list-item-meta-description .des-showoff{
+  word-break: break-all;
+  max-height: 66px;
+  overflow: hidden;
+}
+.ant-list-split .ant-list-item {
+  border-bottom: 1px solid #d9d9d9 !important;
+}
+.ant-select-selector{
+  border-radius: 8px !important;
+  height: 36px !important;
 }
