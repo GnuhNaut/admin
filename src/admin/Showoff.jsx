@@ -10,7 +10,8 @@ import {
     Radio,
     Button,
     List,
-    Modal
+    Modal,
+    notification
 } from 'antd';
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
@@ -46,6 +47,12 @@ class Showoff extends React.Component {
                     }}
                 >
                     <div>
+
+                        <div
+                            style={{textAlign: 'center', fontWeight: 700}}
+                        >
+                            Thêm trưng bày
+                        </div>
                         <div className="padding-top">
                             Tiêu đề: 
                             <Input value={this.state.title} onChange={e => {
@@ -133,6 +140,9 @@ class Showoff extends React.Component {
                                     this.setState({
                                         listItem: list
                                     })
+                                    notification.success({
+                                        message: `Đã thêm`,
+                                      });
                                 }}
                             >
                                 Thêm
@@ -155,6 +165,11 @@ class Showoff extends React.Component {
                             overflow: 'auto'
                         }}
                     >
+                        <div
+                            style={{textAlign: 'center', fontWeight: 700}}
+                        >
+                            Danh sách trưng bày
+                        </div>
                         <List
                             itemLayout="horizontal"
                             dataSource={this.state.listItem}
@@ -211,20 +226,66 @@ class Showoff extends React.Component {
                                     }}
                                     type="primary"
                                     onClick={e=> {
-                                        let data = JSON.stringify(this.state.listItem)
-                                        console.log("data", data)
-                                        var blob = new Blob([data],
-                                            { type: "text/plain;charset=utf-8" });
-                                        saveAs(blob, "showoff.trealet");
+                                        this.setState({
+                                            modalEditTrealet: true
+                                        })
                                     }}
                                 >
-                                    Lưu
+                                    Xác nhận
                                 </Button>
                             </div>
                         )
                     }
                 </Col>   
             </Row> 
+            <Modal title={null} footer={null} visible={this.state.modalEditTrealet} onCancel={e => {
+                this.setState({
+                    modalEditTrealet: false
+                })
+            }}>
+                <div>
+                    <div className="padding-top">
+                        Tiêu đề cho trưng bày: 
+                        <Input value={this.state.titleTrealet} onChange={e => {
+                            this.setState({
+                                titleTrealet: e.target.value
+                            })
+                        }}/>
+                    </div>
+                    <div className="padding-top">
+                        Mô tả cho trưng bày:
+                        <TextArea rows={4} value={this.state.descriptionTrealet} onChange={e => {
+                            this.setState({
+                                descriptionTrealet: e.target.value
+                            })
+                        }}/>
+                    </div>
+                    <div style={{textAlign: "right"}} className="padding-top">
+                        <Button
+                            style={{
+                                minHeight: 36, 
+                                paddingRight: 25, 
+                                paddingLeft: 25
+                            }}
+                            type="primary"
+                            onClick={e=> {
+                                let trealet = {
+                                    'title':  this.state.titleTrealet,
+                                    'description': this.state.descriptionTrealet,
+                                    'trealet': this.state.listItem
+                                }
+                                let data = JSON.stringify(trealet)
+                                console.log("data", data)
+                                var blob = new Blob([data],
+                                    { type: "text/plain;charset=utf-8" });
+                                saveAs(blob, "showoff.trealet");
+                            }}
+                        >
+                            Lưu
+                        </Button>
+                    </div>
+                </div>
+            </Modal>
             <Modal title={null} footer={null} visible={this.state.modalEdit} onCancel={e => {
                 this.setState({
                     modalEdit: false

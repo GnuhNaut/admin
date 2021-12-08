@@ -11,7 +11,8 @@ import {
     Button,
     List,
     Modal,
-    Select
+    Select,
+    notification
 } from 'antd';
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
@@ -41,6 +42,11 @@ class Game extends React.Component {
                     }}
                 >
                     <div>
+                        <div
+                            style={{textAlign: 'center', fontWeight: 700}}
+                        >
+                            Thêm câu hỏi
+                        </div>
                         <div className="padding-top">
                             Câu hỏi: 
                             <Input value={this.state.question} onChange={e => {
@@ -132,6 +138,9 @@ class Game extends React.Component {
                                     this.setState({
                                         listItem: list
                                     })
+                                    notification.success({
+                                        message: `Đã thêm 1 câu hỏi`,
+                                      });
                                 }}
                             >
                                 Thêm
@@ -154,6 +163,11 @@ class Game extends React.Component {
                             overflow: 'auto'
                         }}
                     >
+                        <div
+                            style={{textAlign: 'center', fontWeight: 700}}
+                        >
+                            Danh sách câu hỏi
+                        </div>
                         <List
                             itemLayout="horizontal"
                             dataSource={this.state.listItem}
@@ -340,7 +354,7 @@ class Game extends React.Component {
                                     })
                                 }}
                             >
-                                Thêm
+                                Lưu
                             </Button>
                         </div>
                     </div>
